@@ -151,12 +151,17 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo/Nazwa Firmy -->
             <a href="#" class="text-2xl font-bold text-blue-600">Alex Maleri</a>
-            <!-- Menu Nawigacyjne -->
-            <div class="hidden md:flex space-x-8">
+            <!-- Menu Nawigacyjne i odnośniki do social mediów -->
+            <div class="hidden md:flex items-center space-x-8">
                 <a href="#services" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Usługi</a>
                 <a href="#gallery" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Galeria</a>
                 <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">O nas</a>
                 <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Kontakt</a>
+                <!-- Odnośniki do mediów społecznościowych -->
+                <div class="flex items-center space-x-4">
+                    <a href="https://facebook.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="https://instagram.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram text-xl"></i></a>
+                </div>
             </div>
             <!-- Przycisk do wyceny na desktop -->
             <a href="#contact" class="nav-link hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-md">
@@ -164,14 +169,14 @@
             </a>
             <!-- Przycisk mobilny -->
             <button class="md:hidden text-gray-600 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2400/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
     </nav>
 
     <!-- Sekcja Powitalna (Hero) -->
-    <header class="relative bg-cover bg-center h-screen flex items-center justify-center text-white" style="background-image: url('https://i.imgur.com/JVe1u2q.jpeg');">
-        <div class="bg-black bg-opacity-50 p-8 md:p-12 rounded-xl text-center max-w-2xl mx-4">
+    <header class="relative bg-cover bg-center h-screen flex items-center justify-center text-white" style="background-image: url('https://i.imgur.com/ujRcPAt.jpeg');">
+        <div class="bg-gray-900 bg-opacity-50 p-8 md:p-12 rounded-xl text-center max-w-2xl mx-4">
             <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-title">Odświeżamy Wnętrza, Chronimy Fasady</h1>
             <p class="text-base md:text-lg mb-8 animate-subtitle">Profesjonalne malowanie domów z dbałością o każdy detal. Zaufaj doświadczeniu, postaw na jakość.</p>
             <a href="#contact" class="nav-link bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-xl transform hover:scale-105 animate-cta">
@@ -283,6 +288,30 @@
         </div>
     </section>
 
+    <!-- Sekcja z licznikiem statystyk -->
+    <section id="stats" class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Statystyka 1: Doświadczenie -->
+                <div>
+                    <!-- Licznik z animacją, wartość docelowa w atrybucie 'data-target' -->
+                    <p class="text-5xl font-bold mb-2 counter" data-target="15" data-suffix="+">0</p>
+                    <p class="text-lg">lat doświadczenia</p>
+                </div>
+                <!-- Statystyka 2: Projekty -->
+                <div>
+                    <p class="text-5xl font-bold mb-2 counter" data-target="200" data-suffix="+">0</p>
+                    <p class="text-lg">wykonanych projektów</p>
+                </div>
+                <!-- Statystyka 3: Zadowolenie -->
+                <div>
+                    <p class="text-5xl font-bold mb-2 counter" data-target="100" data-suffix="%">0</p>
+                    <p class="text-lg">zadowolonych klientów</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Sekcja Opinie -->
     <section class="py-16 bg-stone-100">
         <div class="container mx-auto px-6 text-center">
@@ -338,11 +367,6 @@
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
             <p>&copy; 2024 Alex Maleri. Wszelkie prawa zastrzeżone.</p>
-            <div class="mt-4">
-                <!-- Opcjonalne linki do mediów społecznościowych -->
-                <!-- <a href="#" class="text-gray-400 hover:text-white mx-2"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white mx-2"><i class="fab fa-instagram"></i></a> -->
-            </div>
         </div>
     </footer>
 
@@ -356,7 +380,7 @@
 
 
     <script>
-        // Smooth scrolling for navigation links
+        // Płynne przewijanie do kotwic nawigacyjnych
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -366,7 +390,7 @@
             });
         });
 
-        // 'Before-After' slider functionality
+        // Funkcjonalność suwaka 'Przed i Po'
         const sliders = document.querySelectorAll('.before-after-slider');
 
         sliders.forEach(slider => {
@@ -404,7 +428,7 @@
             window.addEventListener('touchmove', drag);
         });
 
-        // Functionality for image modal
+        // Funkcjonalność modalu do powiększania zdjęć
         const modal = document.getElementById('image-modal');
         const modalImage = document.getElementById('modal-image');
         const galleryImages = document.querySelectorAll('.gallery-image');
@@ -412,7 +436,7 @@
         galleryImages.forEach(image => {
             image.addEventListener('click', () => {
                 modal.classList.remove('hidden');
-                // Use a small timeout to allow the transition to work
+                // Użycie krótkiego opóźnienia, aby zadziałała animacja przejścia
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
                 }, 10); 
@@ -425,14 +449,56 @@
             modal.classList.add('opacity-0');
             setTimeout(() => {
                 modal.classList.add('hidden');
-            }, 300); // Wait for the transition to finish before hiding
+            }, 300); // Czekaj na zakończenie animacji, zanim ukryjesz modal
         }
         
-        // Close modal on outside click
+        // Zamknij modal po kliknięciu poza obrazem
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 closeModal();
             }
+        });
+
+        // Skrypt do animacji licznika statystyk
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter');
+            const statsSection = document.getElementById('stats');
+            let hasAnimated = false; // Flaga, aby animacja wykonała się tylko raz
+
+            const animateCounter = (counter) => {
+                const target = parseInt(counter.dataset.target, 10);
+                // Pobieranie sufiksu (+, % lub pusty) z atrybutu data-suffix
+                const suffix = counter.dataset.suffix || ''; 
+                
+                let current = 0;
+                const duration = 2000; // Czas trwania animacji w milisekundach
+                const step = target / (duration / 16); // Około 60 klatek na sekundę
+
+                const updateCounter = () => {
+                    current += step;
+                    if (current >= target) {
+                        counter.textContent = target + suffix;
+                    } else {
+                        counter.textContent = Math.ceil(current) + suffix;
+                        requestAnimationFrame(updateCounter);
+                    }
+                };
+                updateCounter();
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        counters.forEach(animateCounter);
+                        hasAnimated = true;
+                        observer.unobserve(statsSection); // Przestań obserwować po animacji
+                    }
+                });
+            }, {
+                threshold: 0.5 // Zaczyna animację, gdy 50% sekcji jest widoczne
+            });
+
+            observer.observe(statsSection);
         });
 
     </script>
