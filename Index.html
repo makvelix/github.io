@@ -152,35 +152,30 @@
             <!-- Logo/Nazwa Firmy -->
             <a href="#" class="text-2xl font-bold text-blue-600">Alex Maleri</a>
             
-            <!-- Odnośniki do mediów społecznościowych w wersji mobilnej -->
+            <!-- Mobile: Social Icons i przycisk menu -->
             <div class="flex items-center space-x-4 md:hidden">
                 <a href="https://facebook.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f text-xl"></i></a>
                 <a href="https://instagram.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram text-xl"></i></a>
-            </div>
-
-            <!-- Kontener na przyciski po prawej stronie -->
-            <div class="flex items-center space-x-4">
-                <!-- Menu Nawigacyjne i odnośniki do social mediów (wersja desktop) -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <!-- Odnośniki do mediów społecznościowych na desktop -->
-                    <div class="flex items-center space-x-4">
-                        <a href="https://facebook.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="https://instagram.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram text-xl"></i></a>
-                    </div>
-                    <a href="#services" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Usługi</a>
-                    <a href="#gallery" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Galeria</a>
-                    <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">O nas</a>
-                    <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Kontakt</a>
-                </div>
-                <!-- Przycisk do wyceny na desktop -->
-                <a href="#contact" class="nav-link hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-md">
-                    Darmowa wycena
-                </a>
-                <!-- Przycisk menu mobilnego -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none ml-4">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2400/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
+
+            <!-- Desktop: Menu i odnośniki do social mediów -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Usługi</a>
+                <a href="#gallery" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Galeria</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">O nas</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Kontakt</a>
+                <div class="flex items-center space-x-4">
+                    <a href="https://facebook.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="https://instagram.com/alex-maleri" class="text-gray-600 hover:text-blue-600 transition-colors duration-300" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram text-xl"></i></a>
+                </div>
+            </div>
+            <!-- Przycisk do wyceny na desktop -->
+            <a href="#contact" class="nav-link hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-md">
+                Darmowa wycena
+            </a>
         </div>
 
         <!-- Menu nawigacyjne w wersji mobilnej -->
