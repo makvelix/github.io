@@ -151,7 +151,7 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo/Nazwa Firmy -->
             <a href="#" class="text-2xl font-bold text-blue-600">Alex Maleri</a>
-            <!-- Menu Nawigacyjne i odnośniki do social mediów -->
+            <!-- Menu Nawigacyjne i odnośniki do social mediów (wersja desktop) -->
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#services" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Usługi</a>
                 <a href="#gallery" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Galeria</a>
@@ -167,10 +167,23 @@
             <a href="#contact" class="nav-link hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-md">
                 Darmowa wycena
             </a>
-            <!-- Przycisk mobilny -->
-            <button class="md:hidden text-gray-600 focus:outline-none">
+            <!-- Przycisk menu mobilnego -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2400/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
+        </div>
+
+        <!-- Menu nawigacyjne w wersji mobilnej -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="flex flex-col items-center py-4 space-y-4">
+                <a href="#services" class="nav-link block text-gray-600 hover:text-blue-600 transition-colors duration-300">Usługi</a>
+                <a href="#gallery" class="nav-link block text-gray-600 hover:text-blue-600 transition-colors duration-300">Galeria</a>
+                <a href="#about" class="nav-link block text-gray-600 hover:text-blue-600 transition-colors duration-300">O nas</a>
+                <a href="#contact" class="nav-link block text-gray-600 hover:text-blue-600 transition-colors duration-300">Kontakt</a>
+                <a href="#contact" class="nav-link bg-blue-600 text-white w-full text-center px-5 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-md">
+                    Darmowa wycena
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -499,8 +512,29 @@
             });
 
             observer.observe(statsSection);
-        });
 
+            // Nowa funkcjonalność dla menu mobilnego
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+
+            // Funkcja do przełączania menu mobilnego
+            const toggleMobileMenu = () => {
+                mobileMenu.classList.toggle('hidden');
+            };
+
+            // Dodaj nasłuchiwacz kliknięć na przycisku menu
+            mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+            // Dodaj nasłuchiwacz kliknięć na linkach, aby zamknąć menu po kliknięciu
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
