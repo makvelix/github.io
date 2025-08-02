@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Maleri | Profesjonalne Malowanie Wnętrz i Elewacji</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Dodanie biblioteki ikon Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Animacja dla tytułu i podtytułu */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-title {
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        .animate-subtitle {
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+        
+        .animate-cta {
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        /* Styl dla suwaka 'przed i po' */
+        .before-after-slider {
+            position: relative;
+            cursor: ew-resize;
+            touch-action: none;
+            overflow: hidden;
+        }
+
+        .before-after-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .before-after-slider .after-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%; /* Początkowa pozycja */
+            overflow: hidden;
+        }
+
+        .before-after-slider .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background-color: white;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .before-after-slider .slider-handle:after,
+        .before-after-slider .slider-handle:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .before-after-slider .slider-handle:before {
+            content: '↔️';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: black;
+        }
+        
+        /* Modal styles */
+        .image-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            z-index: 110;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-gray-800">
+
+    <!-- Nagłówek i Nawigacja -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo/Nazwa Firmy -->
+            <a href="#" class="text-2xl font-bold text-blue-600">Alex Maleri</a>
+            <!-- Menu Nawigacyjne -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#services" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Usługi</a>
+                <a href="#gallery" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Galeria</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">O nas</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors duration-300">Kontakt</a>
+            </div>
+            <!-- Przycisk do wyceny na desktop -->
+            <a href="#contact" class="nav-link hidden md:block bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 shadow-md">
+                Darmowa wycena
+            </a>
+            <!-- Przycisk mobilny -->
+            <button class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sekcja Powitalna (Hero) -->
+    <header class="relative bg-cover bg-center h-screen flex items-center justify-center text-white" style="background-image: url('https://i.imgur.com/JVe1u2q.jpeg');">
+        <div class="bg-black bg-opacity-50 p-8 md:p-12 rounded-xl text-center max-w-2xl mx-4">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 animate-title">Odświeżamy Wnętrza, Chronimy Fasady</h1>
+            <p class="text-base md:text-lg mb-8 animate-subtitle">Profesjonalne malowanie domów z dbałością o każdy detal. Zaufaj doświadczeniu, postaw na jakość.</p>
+            <a href="#contact" class="nav-link bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-xl transform hover:scale-105 animate-cta">
+                Poproś o bezpłatną wycenę
+            </a>
+        </div>
+        <!-- Płynne przejście na dole nagłówka -->
+        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-stone-50 to-transparent z-10"></div>
+    </header>
+
+    <!-- Sekcja Usługi -->
+    <section id="services" class="py-16 bg-stone-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Nasze Usługi</h2>
+            <p class="text-gray-600 mb-12 max-w-3xl mx-auto">Oferujemy kompleksowe usługi malarskie, zarówno wewnątrz, jak i na zewnątrz budynków.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Karta usługi - Malowanie Wnętrz -->
+                <div class="bg-stone-100 p-8 rounded-2xl shadow-lg transition-transform transform hover:scale-105 duration-300">
+                    <div class="text-5xl text-blue-600 mb-4">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Malowanie Wnętrz</h3>
+                    <p class="text-gray-600">Od ścian i sufitów po listwy i drzwi – zapewniamy precyzyjne i estetyczne wykończenie każdego pomieszczenia.</p>
+                </div>
+                <!-- Karta usługi - Malowanie Elewacji -->
+                <div class="bg-stone-100 p-8 rounded-2xl shadow-lg transition-transform transform hover:scale-105 duration-300">
+                    <div class="text-5xl text-blue-600 mb-4">
+                        <i class="fas fa-house-chimney"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Malowanie Elewacji</h3>
+                    <p class="text-gray-600">Przygotowanie powierzchni, mycie, gruntowanie i malowanie elewacji, które chroni Twój dom przed warunkami atmosferycznymi.</p>
+                </div>
+                <!-- Karta usługi - Drobne prace remontowe -->
+                <div class="bg-stone-100 p-8 rounded-2xl shadow-lg transition-transform transform hover:scale-105 duration-300">
+                    <div class="text-5xl text-blue-600 mb-4">
+                        <i class="fas fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2"> Remonty</h3>
+                    <p class="text-gray-600">Szpachlowanie, gładzie, przygotowanie ścian – wszystko, czego potrzebujesz przed malowaniem, by uzyskać idealny efekt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja Galeria -->
+    <section id="gallery" class="py-16 bg-stone-100">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Nasza Galeria</h2>
+            <p class="text-gray-600 mb-12 max-w-3xl mx-auto">Zobacz efekty naszej pracy. Oto kilka zdjęć z realizacji, które pokazują naszą pasję do detali.</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Suwak 'Przed i Po' - Wnętrze -->
+                <div class="relative rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="before-after-slider w-full h-72">
+                        <!-- Obraz 'Przed' -->
+                        <img src="https://i.imgur.com/DJmmW8t.jpeg" alt="Wnętrze przed malowaniem" class="z-1">
+                        <!-- Kontener na obraz 'Po' -->
+                        <div class="after-image-container z-2">
+                            <img src="https://i.imgur.com/x4YuNTq.jpeg" alt="Wnętrze po malowaniu">
+                        </div>
+                        <!-- Uchwyt suwaka -->
+                        <div class="slider-handle z-3"></div>
+                    </div>
+                </div>
+
+                <!-- Pozostałe zdjęcia galerii -->
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <img src="https://i.imgur.com/iAMDsWJ.jpeg" alt="Elewacja domu" class="w-full h-72 object-cover gallery-image">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <img src="https://i.imgur.com/TXMjhgM.jpeg" alt="Detal malowania" class="w-full h-72 object-cover gallery-image">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <img src="https://i.imgur.com/9qtImW5.jpeg" alt="Salon po remoncie" class="w-full h-72 object-cover gallery-image">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+                    <img src="https://i.imgur.com/A7kbgdh.jpeg" alt="Sypialnia w nowym kolorze" class="w-full h-72 object-cover gallery-image">
+                </div>
+
+                <!-- Nowy suwak 'Przed i Po' - Taras -->
+                <div class="relative rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="before-after-slider w-full h-72">
+                        <!-- Obraz 'Przed' - Taras -->
+                        <img src="https://i.imgur.com/yRk7TtI.jpeg" alt="Taras przed malowaniem" class="z-1">
+                        <!-- Kontener na obraz 'Po' - Taras -->
+                        <div class="after-image-container z-2">
+                            <img src="https://i.imgur.com/LYs2UG0.jpeg" alt="Taras po malowaniu" >
+                        </div>
+                        <!-- Uchwyt suwaka -->
+                        <div class="slider-handle z-3"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja O nas -->
+    <section id="about" class="py-16 bg-stone-50">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+            <div class="md:w-1/3">
+                <img src="https://i.imgur.com/P05mXFh.jpeg" alt="Właściciel firmy" class="rounded-xl shadow-lg">
+            </div>
+            <div class="md:w-2/3 text-left">
+                <h2 class="text-3xl font-bold mb-4">O nas</h2>
+                <p class="text-gray-600 mb-4">Jesteśmy zespołem pasjonatów malarstwa, którzy od lat odmieniają domy w Twojej okolicy. Nasza filozofia opiera się na **precyzji, terminowości i pełnym zadowoleniu klienta**.</p>
+                <p class="text-gray-600">Każdy projekt traktujemy indywidualnie, używając tylko najwyższej jakości farb i materiałów. Niezależnie od tego, czy potrzebujesz odświeżyć salon, czy całkowicie odmienić fasadę, możesz liczyć na nasze pełne zaangażowanie.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja Opinie -->
+    <section class="py-16 bg-stone-100">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Opinie Klientów</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <!-- Opinia 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <p class="text-gray-600 italic mb-4">"Wnętrze mojego domu wygląda teraz niesamowicie! Praca wykonana szybko, czysto i z dużą dbałością o detale. Polecam!"</p>
+                    <p class="font-semibold text-blue-600">- Anna W., Poznań</p>
+                </div>
+                <!-- Opinia 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <p class="text-gray-600 italic mb-4">"Elewacja mojego domu zyskała drugie życie. Profesjonalne podejście i świetny kontakt. Na pewno skorzystam ponownie."</p>
+                    <p class="font-semibold text-blue-600">- Piotr K., Gdynia</p>
+                </div>
+                <!-- Opinia 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <p class="text-gray-600 italic mb-4">"Zaskoczyła mnie jakość i precyzja. Wszystko poszło zgodnie z planem, bez żadnych opóźnień. Bardzo polecam tego malarza."</p>
+                    <p class="font-semibold text-blue-600">- Janina S., Wrocław</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja Kontakt -->
+    <section id="contact" class="py-16 bg-stone-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Skontaktuj się z nami</h2>
+            <p class="text-gray-600 mb-12 max-w-3xl mx-auto">Chcesz odmienić swoje wnętrze lub fasadę? Wypełnij formularz lub zadzwoń, a przygotujemy darmową wycenę.</p>
+            
+            <div class="max-w-2xl mx-auto bg-stone-100 p-8 rounded-2xl shadow-lg">
+                <form>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <input type="text" placeholder="Imię i nazwisko" class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors duration-300">
+                        <input type="email" placeholder="Adres e-mail" class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors duration-300">
+                    </div>
+                    <div class="mb-6">
+                        <textarea rows="5" placeholder="Twoja wiadomość..." class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors duration-300"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg">
+                        Wyślij wiadomość
+                    </button>
+                </form>
+                <div class="mt-8 text-center text-gray-600">
+                    <p>Lub zadzwoń: <a href="tel:+48123456789" class="text-blue-600 hover:underline">+48 123 456 789</a></p>
+                    <p>E-mail: <a href="mailto:kontakt@twoj-malarz.pl" class="text-blue-600 hover:underline">kontakt@twoj-malarz.pl</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stopka -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Alex Maleri. Wszelkie prawa zastrzeżone.</p>
+            <div class="mt-4">
+                <!-- Opcjonalne linki do mediów społecznościowych -->
+                <!-- <a href="#" class="text-gray-400 hover:text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white mx-2"><i class="fab fa-instagram"></i></a> -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal do powiększania zdjęć -->
+    <div id="image-modal" class="image-modal-overlay hidden transition-opacity duration-300 opacity-0">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <div class="image-modal-content">
+            <img id="modal-image" src="" alt="Powiększone zdjęcie" class="rounded-xl">
+        </div>
+    </div>
+
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 'Before-After' slider functionality
+        const sliders = document.querySelectorAll('.before-after-slider');
+
+        sliders.forEach(slider => {
+            const afterContainer = slider.querySelector('.after-image-container');
+            const handle = slider.querySelector('.slider-handle');
+            let isDragging = false;
+
+            const startDrag = (e) => {
+                isDragging = true;
+                e.preventDefault();
+            };
+
+            const endDrag = () => {
+                isDragging = false;
+            };
+
+            const drag = (e) => {
+                if (!isDragging) return;
+                
+                const rect = slider.getBoundingClientRect();
+                let x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+
+                x = Math.max(0, Math.min(x, rect.width));
+
+                afterContainer.style.width = x + 'px';
+                handle.style.left = x + 'px';
+            };
+
+            slider.addEventListener('mousedown', startDrag);
+            window.addEventListener('mouseup', endDrag);
+            window.addEventListener('mousemove', drag);
+
+            slider.addEventListener('touchstart', startDrag);
+            window.addEventListener('touchend', endDrag);
+            window.addEventListener('touchmove', drag);
+        });
+
+        // Functionality for image modal
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const galleryImages = document.querySelectorAll('.gallery-image');
+
+        galleryImages.forEach(image => {
+            image.addEventListener('click', () => {
+                modal.classList.remove('hidden');
+                // Use a small timeout to allow the transition to work
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                }, 10); 
+                modalImage.src = image.src;
+                modalImage.alt = image.alt;
+            });
+        });
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300); // Wait for the transition to finish before hiding
+        }
+        
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+    </script>
+</body>
+</html>
